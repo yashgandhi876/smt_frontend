@@ -1,0 +1,27 @@
+.headerMain {
+	color: white;
+	background-color: black;
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	height: 100px;
+}
+
+.hederContent {
+	width: 60%;
+	margin: 0;
+	padding: 0px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.headerName {
+	margin: 0px 0px 0px 20px;
+	padding: 0;
+}
+
+.link {
+	color: white;
+	text-decoration: none;
+}
