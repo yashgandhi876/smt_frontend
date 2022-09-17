@@ -1,0 +1,12 @@
+.spaceAllocationMain{
+    width: 80%;
+    margin: auto;
+    padding: 0px;
+    display: flex;
+    flex-direction: column;
+}
+
+.allocatedSpaceDetails{
+    margin: 20px 0px;
+    padding: 0px;
+}

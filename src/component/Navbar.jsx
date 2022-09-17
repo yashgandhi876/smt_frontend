@@ -10,9 +10,14 @@ function Navbar() {
 						<h2 className="headerName">Space Managment Tool</h2>
 					</Link>
 				</div>
-				<Link className="link login" to="/login">
-					Login
-				</Link>
+				<div className="links">
+					<Link className="link login" to="/spaceAllowcation">
+						Allocate Space
+					</Link>
+					<Link className="link login" to="/login">
+						Login
+					</Link>
+				</div>
 			</div>
 		</div>
 	);
