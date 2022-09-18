@@ -6,7 +6,7 @@ import "../style/BookingSpace.css";
 
 function Dropdown(props) {
 	return (
-		<FormControl sx={{ m: 1, minWidth: 120 }} size="small">
+		<FormControl sx={{ m: 1, minWidth: 120 }} size="small" className="dropdownForm">
 			<InputLabel id={`${props.labelId}`}>{props.label}</InputLabel>
 			<Select
 				className={`dropdown ${props.classNameDropDown}`}

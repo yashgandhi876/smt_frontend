@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import axios from 'axios';
 import { toast } from "react-toastify";
  import "react-toastify/dist/ReactToastify.css";
+import { Navigate } from "react-router-dom";
 
 function LogIn(props) {
 	const [userName, setUserName] = useState("");
@@ -24,35 +25,44 @@ function LogIn(props) {
 	const onLogin = () => {
 		let options = {
 			userName,
-			password
-		}
+			passWord: password,
+		};
 
-		axios.post("http://localhost:8080/api/login", options).then(userInfo => {
-			props.setUser(userInfo);
-			toast.success("LogedIn successfully!", {
-				position: "bottom-right",
-				autoClose: 5000,
-				hideProgressBar: false,
-				closeOnClick: true,
-				pauseOnHover: true,
-				draggable: true,
-				progress: undefined,
+		const headers = {
+			"Access-Control-Allow-Origin": "*",
+			"Content-Type": "application/json",
+		};
+
+		axios
+			.post("http://localhost:8080/api/login", options, headers)
+			.then((userInfo) => {
+				props.setUser(userInfo.data);
+				toast.success("LogedIn successfully!", {
+					position: "bottom-right",
+					autoClose: 5000,
+					hideProgressBar: false,
+					closeOnClick: true,
+					pauseOnHover: true,
+					draggable: true,
+					progress: undefined,
+				});
+			})
+			.catch((error) => {
+				toast.error("Authentication failed please check username and password!", {
+					position: "bottom-right",
+					autoClose: 5000,
+					hideProgressBar: false,
+					closeOnClick: true,
+					pauseOnHover: true,
+					draggable: true,
+					progress: undefined,
+				});
 			});
-		}).catch(error => {
-			toast.error("Authentication failed please check username and password!", {
-				position: "bottom-right",
-				autoClose: 5000,
-				hideProgressBar: false,
-				closeOnClick: true,
-				pauseOnHover: true,
-				draggable: true,
-				progress: undefined,
-			});
-		})
 	};
 
 	return (
 		<div className="container loginMain">
+			{Object.keys(props.user).length !== 0 && <Navigate to="/spaceAllowcation" replace={true} />}
 			<span className="loginHeader">Login</span>
 			<div className="form " action="">
 				<TextField

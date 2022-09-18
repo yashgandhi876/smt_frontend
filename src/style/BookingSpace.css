@@ -1,3 +1,123 @@
 .dropdown{
-    width: 150px;
+    width: 350px;
+}
+
+.dropdownForm{
+    margin: 30px 0px !important;
+}
+
+.btn {
+    margin: 80px 10px;
+    padding: 10px;
+    width: 100px;
+    font-size: 20px;
+    text-decoration: none !important;
+    font-family: Bold, Helvetica, Arial, sans-serif;
+    font-weight: 700;
+    font-style: normal;
+    cursor: pointer;
+}
+
+.save {
+    background-color: #000;
+    color: #fff;
+}
+
+.teamAllocationRow{
+    display: flex;
+    flex-direction: column;
+}
+
+.teamCards{
+    display: flex;
+    height: auto;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.floorDiv{
+    display: flex;
+    flex-direction: column;
+}
+
+.floorButton{
+    width: 80%;
+    padding: 10px;
+    margin: 15px auto;
+    color: #fff;
+    background-color: skyblue;
+    outline: none;
+    font-size: 26px;
+    border-radius: 50px;
+    cursor: pointer;
+    border: none;
+    transition: 0.3s;
+    align-items: center;
+}
+
+.floorButton:hover {
+    box-shadow: 5px 5px 10px #888888;
+    width: 85%;
+    transition: 0.3s;
+}
+
+.floorButton:hover::after{
+    box-shadow: 5px 5px 10px #888888;
+    width: 90%;
+    transition: 0.3s;
+}
+
+
+.zoneDiv {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.zoneButton {
+    width: 200px;
+    height: 300px;
+    padding: 10px;
+    margin: 15px auto;
+    color: #fff;
+    background-color: skyblue;
+    outline: none;
+    font-size: 36px;
+    border-radius: 10px;
+    cursor: pointer;
+    border: none;
+    transition: 0.3s;
+    align-items: center;
+}
+
+.red{
+    background-color: orange;
+    color: white
+}
+
+.green{
+    background-color: lightgreen;
+    color: white
+}
+
+.purple {
+    background-color: pink;
+    color: white
+}
+
+.grey {
+    background-color: grey;
+    color: white
+}
+
+.zoneButton:hover {
+    box-shadow: 5px 5px 10px #888888;
+    width: 220px;
+    transition: 0.3s;
+}
+
+.zoneButton:hover::after {
+    box-shadow: 5px 5px 10px #888888;
+    width: 90%;
+    transition: 0.3s;
 }

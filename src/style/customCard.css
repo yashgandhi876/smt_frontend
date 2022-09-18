@@ -1,0 +1,10 @@
+.customCard:hover{
+    box-shadow: 5px 5px 10px #888888;
+}
+
+.customCard {
+    /* -webkit-flex: 2 0 0; */
+    flex: 1 1 33%;
+    margin: 20px 10px;
+    height: auto;
+}

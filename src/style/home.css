@@ -1,0 +1,12 @@
+.homeMain{
+    width: 80%;
+    margin: 20px auto;
+    padding: 0px;
+}
+
+.mainContent{
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    text-align: center;
+}

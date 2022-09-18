@@ -1,16 +1,12 @@
-
-import axios from "axios";
 import { useEffect, useState } from "react";
 import "../style/spaceAllocation.css"
 import BookingSpace from "./BookingSpace";
 
-function SpaceAllocation() {
+function SpaceAllocation(props) {
     const [totalNumberOfSeats, setTotalNumberOfSeats] = useState(0)
 
     useEffect(() => {
-        axios.get("http://localhost:8080/api/totalSeatCount").then(seatCount => {
-            setTotalNumberOfSeats(seatCount)
-        })
+        setTotalNumberOfSeats(props.user.totalSeats)
     }, [])
 
 	return (
@@ -19,7 +15,7 @@ function SpaceAllocation() {
 				<h3>Total Number of seats : {totalNumberOfSeats}</h3>
 			</div>
             <div className="bookingSpaceMain">
-                <BookingSpace />
+                <BookingSpace user={props.user} />
             </div>
 		</div>
 	);

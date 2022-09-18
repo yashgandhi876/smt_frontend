@@ -1,7 +1,7 @@
 import "../style/navbar.css"
 import { Link } from "react-router-dom";
 
-function Navbar() {
+function Navbar(props) {
 	return (
 		<div className="headerMain">
 			<div className="hederContent">
@@ -15,7 +15,7 @@ function Navbar() {
 						Allocate Space
 					</Link>
 					<Link className="link login" to="/login">
-						Login
+						{ Object.keys(props.user).length === 0  ? `Login` : props.user.userName}
 					</Link>
 				</div>
 			</div>
