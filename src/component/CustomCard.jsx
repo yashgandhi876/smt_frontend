@@ -7,7 +7,7 @@ import "../style/customCard.css"
 
 function CustomCard(props) {
 	return (
-		<Card className="customCard" sx={{ maxWidth: 345 }}>
+		<Card key={`${props.teamId}`} className="customCard" sx={{ maxWidth: 345 }}>
 			<CardActionArea>
 				<CardMedia component="img" height="140" image={require(`../img/${props.teamImg}`)} alt="Team Image" />
 				<CardContent>
@@ -18,7 +18,7 @@ function CustomCard(props) {
 						{`Handled by - ${props.teamManager}`}
 					</Typography>
 					<Typography variant="body2" color="text.secondary">
-						{`teamDescription - ${props.teamDescription}`}
+						{`Team Description - ${props.teamDescription}`}
 					</Typography>
 				</CardContent>
 			</CardActionArea>

@@ -110,6 +110,11 @@
     color: white
 }
 
+.black{
+    background-color: #000 !important;
+    color: white !important;
+}
+
 .zoneButton:hover {
     box-shadow: 5px 5px 10px #888888;
     width: 220px;
@@ -120,4 +125,27 @@
     box-shadow: 5px 5px 10px #888888;
     width: 90%;
     transition: 0.3s;
+}
+
+
+.seatDiv {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.seatButton {
+    flex-wrap: wrap;
+    width: auto;
+    height: 50px;
+    padding: 5px;
+    margin: 5px auto;
+    color: #000;
+    background-color: lightgray;
+    outline: none;
+    font-size: 24px;
+    border-radius: 10px;
+    cursor: pointer;
+    border: none;
+    transition: 0.3s;
+    align-items: center;
 }

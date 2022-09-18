@@ -14,9 +14,16 @@ function Navbar(props) {
 					<Link className="link login" to="/spaceAllowcation">
 						Allocate Space
 					</Link>
-					<Link className="link login" to="/login">
-						{ Object.keys(props.user).length === 0  ? `Login` : props.user.userName}
-					</Link>
+
+					{Object.keys(props.user).length === 0 ? (
+						<Link className="link login" to="/login">
+							Login
+						</Link>
+					) : (
+						<Link className="link login" to="/" onClick={() => {props.setUser({})}}>
+							Logout
+						</Link>
+					)}
 				</div>
 			</div>
 		</div>
