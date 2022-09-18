@@ -23,47 +23,54 @@ function BookingSpace(props) {
     const [seatNumbersOptions, setSeatNumbersOptions] = useState({});
 
 	useEffect(() => {
-		axios
-			.get(`http://localhost:8080/getTeams?userId=${props.user.id}`)
-			.then((data) => {
-				setTeamData(data.data);
-				setTeamNameOption(
-					data.data.map((singleData) => ({ key: singleData.id, text: singleData.team, value: singleData.id }))
-				);
-			})
-			.catch((error) => {
-				toast.error("Failed to fetch teams", {
-					position: "bottom-right",
-					autoClose: 5000,
-					hideProgressBar: false,
-					closeOnClick: true,
-					pauseOnHover: true,
-					draggable: true,
-					progress: undefined,
+
+		if (Object.keys(props.user).length !== 0) {
+			axios
+				.get(`http://localhost:8080/getTeams?userId=${props.user.id}`)
+				.then((data) => {
+					setTeamData(data.data);
+					setTeamNameOption(
+						data.data.map((singleData) => ({
+							key: singleData.id,
+							text: singleData.team,
+							value: singleData.id,
+						}))
+					);
+				})
+				.catch((error) => {
+					toast.error("Failed to fetch teams", {
+						position: "bottom-right",
+						autoClose: 5000,
+						hideProgressBar: false,
+						closeOnClick: true,
+						pauseOnHover: true,
+						draggable: true,
+						progress: undefined,
+					});
 				});
-			});
-		axios
-			.get(`http://localhost:8080/getFloors?teamId=${props.user.teamId}`)
-			.then((data) => {
-				setFloorOptions(
-					data.data.map((singleData) => ({
-						key: singleData.id,
-						text: singleData.floorNumber,
-						value: singleData.id,
-					}))
-				);
-			})
-			.catch((error) => {
-				toast.error("Failed to fetch floors", {
-					position: "bottom-right",
-					autoClose: 5000,
-					hideProgressBar: false,
-					closeOnClick: true,
-					pauseOnHover: true,
-					draggable: true,
-					progress: undefined,
+			axios
+				.get(`http://localhost:8080/getFloors?teamId=${props.user.teamId}`)
+				.then((data) => {
+					setFloorOptions(
+						data.data.map((singleData) => ({
+							key: singleData.id,
+							text: singleData.floorNumber,
+							value: singleData.id,
+						}))
+					);
+				})
+				.catch((error) => {
+					toast.error("Failed to fetch floors", {
+						position: "bottom-right",
+						autoClose: 5000,
+						hideProgressBar: false,
+						closeOnClick: true,
+						pauseOnHover: true,
+						draggable: true,
+						progress: undefined,
+					});
 				});
-			});
+		}
 	}, []);
 
 	const onTeamNameChange = (teamNameId) => {
@@ -72,6 +79,8 @@ function BookingSpace(props) {
 
 	const onFloorNumberChange = (floorId) => {
 		setFloorNumber(floorId);
+		setZoneNumber("");
+		setSeatNumbers([]);
 		axios
 			.get(`http://localhost:8080/getZones?teamId=${props.user.teamId}&floorId=${floorId}`)
 			.then((data) => {
@@ -98,6 +107,7 @@ function BookingSpace(props) {
 
 	const onZoneNumberChange = (zoneId) => {
 		setZoneNumber(zoneId);
+		setSeatNumbers([])
 		axios
 			.get(`http://localhost:8080/seats?teamId=${props.user.teamId}&floorId=${floorNumber}&zoneId=${zoneId}`)
 			.then((data) => {
@@ -136,6 +146,7 @@ function BookingSpace(props) {
             setSeatNumbers([...seatNumbers, Number(seatId)]);
 			setSeatNumbersOptions({ ...seatNumbersOptions, [seatId]: { ...seatNumbersOptions[seatId], booked: 1 } });
         }
+
 	};
 
 	const OnSaveData = (event) => {
@@ -167,9 +178,7 @@ function BookingSpace(props) {
 					newData[seatNumber].isDisabled = true;
 				})
 				setSeatNumbersOptions(newData);
-				setTeamNumber("")
-				setFloorNumber("")
-				setZoneNumber("")
+				props.setTotalNumberOfSeats(props.totalNumberOfSeats - seatNumbers.length);
 				setSeatNumbers([])
 			})
 			.catch((error) => {
@@ -191,7 +200,11 @@ function BookingSpace(props) {
 
 	return (
 		<div className="bookingSpaceMainDiv">
-			<div className="selectAny"></div>
+			<div className="selectAny">
+				<div>Team Selected - {teamNumber}</div>
+				<div>Floor Selected - {floorNumber}</div>
+				<div>zone Selected - {zoneNumber}</div>
+			</div>
 			<div className="teamAllocationRow">
 				<div className="teamCards">
 					<Box sx={{ width: "100%", typography: "body1" }}>

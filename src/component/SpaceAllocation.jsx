@@ -19,7 +19,11 @@ function SpaceAllocation(props) {
 				<h3>Total Number of seats : {totalNumberOfSeats}</h3>
 			</div>
 			<div className="bookingSpaceMain">
-				<BookingSpace user={props.user} />
+				<BookingSpace
+					user={props.user}
+					totalNumberOfSeats={totalNumberOfSeats}
+					setTotalNumberOfSeats={setTotalNumberOfSeats}
+				/>
 			</div>
 		</div>
 	);
