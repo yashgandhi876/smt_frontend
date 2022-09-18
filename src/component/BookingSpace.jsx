@@ -18,7 +18,8 @@ function BookingSpace(props) {
 	const [teamData, setTeamData] = useState([]);
 	const [value, setValue] = useState("1");
 	const [teamNumber, setTeamNumber] = useState("");
-	const [dateFrom, setDateFrom] = useState("");
+	const [dateFrom, setDateFrom] = useState(dayjs());
+	const [dateTo, setDateTo] = useState("");
 	const [teamName, setTeamName] = useState("");
 	const [floorNumber, setFloorNumber] = useState("");
 	const [floorName, setFloorName] = useState("");
@@ -230,6 +231,8 @@ function BookingSpace(props) {
 			floorId: floorNumber,
 			zoneId: zoneNumber,
 			seatIds: seatNumbers,
+			dateFrom: dateFrom,
+			dateTo: dateTo
 		};
 		axios
 			.put(`http://localhost:8080/bookSeats`, bookingData)
@@ -273,6 +276,10 @@ function BookingSpace(props) {
 	const onDateFromChange = (newValue) => {
 		setDateFrom(newValue)
 	}
+
+	const onDateToChange = (newValue) => {
+		setDateTo(newValue);
+	};
 
 	return (
 		<div className="bookingSpaceMainDiv">
@@ -335,10 +342,10 @@ function BookingSpace(props) {
 										{zoneOption.map((singleZone) => (
 											<button
 												key={`${singleZone.key}`}
-												className={`zoneButton ${singleZone.text === "A" && `green`} ${
-													singleZone.text === "B" && `orange`
+												className={`zoneButton ${singleZone.text === "A" && `black`} ${
+													singleZone.text === "B" && `lightseagreen`
 												} ${singleZone.text === "C" && `purple`} ${
-													singleZone.text === "D" && `grey`
+													singleZone.text === "D" && `orange`
 												}`}
 												onClick={() => {
 													onZoneNumberChange(singleZone.key, singleZone.text);
@@ -354,12 +361,23 @@ function BookingSpace(props) {
 							</TabPanel>
 							<TabPanel value="4">
 								<div className="seatMainBtn">
-									<LocalizationProvider dateAdapter={AdapterDayjs}>
+									<LocalizationProvider className={"dates"} dateAdapter={AdapterDayjs}>
 										<DesktopDatePicker
-											label="Book from"
+											className="date dateFrom"
+											label="Book From"
 											inputFormat="DD/MM/YYYY"
 											value={dateFrom}
 											onChange={onDateFromChange}
+											renderInput={(params) => <TextField {...params} />}
+											disablePast
+										/>
+										<DesktopDatePicker
+											className="date dateTo"
+											label="Book To"
+											inputFormat="DD/MM/YYYY"
+											value={dateTo}
+											disablePast
+											onChange={onDateToChange}
 											renderInput={(params) => <TextField {...params} />}
 										/>
 									</LocalizationProvider>

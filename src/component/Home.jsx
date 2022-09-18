@@ -4,8 +4,7 @@ function Home() {
     return (
 		<div className="homeMain">
 			<div className="mainContent">
-				<h4>Space Managment Tool</h4> &nbsp;
-				<span> is mainly designed and developed for credit suisse to allocate office space to every team in each department effectively </span>
+				<h1 className="headerNameInside">Welcome to SpaceKo</h1> &nbsp;
 			</div>
 		</div>
 	);

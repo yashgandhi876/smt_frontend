@@ -7,7 +7,7 @@ function Navbar(props) {
 			<div className="hederContent">
 				<div className="headerNameBox">
 					<Link className="link name" to="/">
-						<h2 className="headerName">Space Managment Tool</h2>
+						<h1 className="headerName">SpaceKo </h1>
 					</Link>
 				</div>
 				<div className="links">

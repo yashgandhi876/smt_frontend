@@ -39,14 +39,15 @@
 .floorDiv{
     display: flex;
     flex-direction: column;
+    margin: 25px auto;
 }
 
 .floorButton{
-    width: 80%;
+    width: 50%;
     padding: 10px;
     margin: 15px auto;
     color: #fff;
-    background-color: skyblue;
+    background-color: black;
     outline: none;
     font-size: 26px;
     border-radius: 50px;
@@ -90,6 +91,11 @@
     align-items: center;
 }
 
+.black{
+    background-color: black;
+        color: white
+}
+
 .orange{
     background-color: orange;
     color: white
@@ -108,6 +114,11 @@
 .grey {
     background-color: grey;
     color: white
+}
+
+.lightseagreen {
+    background-color: lightseagreen !important;
+    color: white !important
 }
 
 .red {
@@ -136,13 +147,14 @@
 .seatDiv {
     display: flex;
     flex-wrap: wrap;
+    margin: 30px auto;
 }
 
 .seatButton {
     flex-wrap: wrap;
     width: auto;
     height: 50px;
-    padding: 5px;
+    padding: 10px;
     margin: 5px auto;
     color: #000;
     background-color: lightgray;
@@ -168,4 +180,9 @@ text-decoration: line-through;
     justify-content: center;
     text-align: center;
     align-items: center;
+    margin: 15px auto;
+}
+
+.date{
+    margin: 10px !important;
 }

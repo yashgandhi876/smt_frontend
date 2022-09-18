@@ -16,7 +16,7 @@ function SpaceAllocation(props) {
 		<div className="spaceAllocationMain">
 			{Object.keys(props.user).length === 0 && <Navigate to="/login" replace={true} />}
 			<div className="allocatedSpaceDetails">
-				<h3>Total Number of seats : {totalNumberOfSeats}</h3>
+				<h3>Seats Available: {totalNumberOfSeats}</h3>
 			</div>
 			<div className="bookingSpaceMain">
 				<BookingSpace
