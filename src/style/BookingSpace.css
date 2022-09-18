@@ -149,3 +149,11 @@
     transition: 0.3s;
     align-items: center;
 }
+
+button:disabled,
+button[disabled] {
+   cursor: not-allowed;
+   background-color: darkgray !important;
+   color: #fff;
+text-decoration: line-through;
+}

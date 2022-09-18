@@ -10,45 +10,17 @@ import TabList from "@material-ui/lab/TabList";
 import TabPanel from "@material-ui/lab/TabPanel";
 
 function BookingSpace(props) {
-	const [teamData, setTeamData] = useState([
-		// { teamId: 23, team: "Team CS", oeCode: "WM1", teamDescription: "BEST TEAM IN CS", managerName: "Yash Gandhi" },
-		// { teamId: 23, team: "Team CS", oeCode: "WM1", teamDescription: "BEST TEAM IN CS", managerName: "Yash Gandhi" },
-		// { teamId: 23, team: "Team CS", oeCode: "WM1", teamDescription: "BEST TEAM IN CS", managerName: "Yash Gandhi" },
-		// { teamId: 23, team: "Team CS", oeCode: "WM1", teamDescription: "BEST TEAM IN CS", managerName: "Yash Gandhi" },
-		// { teamId: 23, team: "Team CS", oeCode: "WM1", teamDescription: "BEST TEAM IN CS", managerName: "Yash Gandhi" },
-	]);
+	const [teamData, setTeamData] = useState([]);
 	const [value, setValue] = useState("1");
 	const [teamNumber, setTeamNumber] = useState("");
 	const [floorNumber, setFloorNumber] = useState("");
 	const [zoneNumber, setZoneNumber] = useState("");
 	const [seatNumbers, setSeatNumbers] = useState([]);
-	const [teamNameOption, setTeamNameOption] = useState([
-		// { key: 1, text: "Team 1", value: 1 }
-	]);
-	const [floorOptions, setFloorOptions] = useState([
-		// { key: 1, text: "1", value: 1 },
-		// { key: 2, text: "2", value: 2 },
-		// { key: 3, text: "3", value: 3 },
-	]);
-	const [zoneOption, setZoneOption] = useState([
-		// { key: 1, text: "A", value: 1 },
-		// { key: 2, text: "B", value: 2 },
-		// { key: 3, text: "C", value: 3 },
-		// { key: 4, text: "D", value: 4 },
-	]);
+	const [teamNameOption, setTeamNameOption] = useState([]);
+	const [floorOptions, setFloorOptions] = useState([]);
+	const [zoneOption, setZoneOption] = useState([]);
 
-    const [seatNumbersOptions, setSeatNumbersOptions] = useState({
-		// 1: { key: 1, text: 1, value: 1, booked: 0 },
-		// 2: { key: 2, text: 2, value: 2, booked: 0 },
-		// 3: { key: 3, text: 3, value: 3, booked: 0 },
-		// 4: { key: 4, text: 4, value: 4, booked: 0 },
-		// 5: { key: 5, text: 5, value: 5, booked: 0 },
-		// 6: { key: 6, text: 6, value: 6, booked: 0 },
-		// 7: { key: 7, text: 7, value: 7, booked: 0 },
-		// 8: { key: 8, text: 8, value: 8, booked: 0 },
-		// 9: { key: 9, text: 9, value: 9, booked: 0 },
-		// 10: { key: 10, text: 10, value: 10, booked: 0 },
-	});
+    const [seatNumbersOptions, setSeatNumbersOptions] = useState({});
 
 	useEffect(() => {
 		axios
@@ -70,7 +42,6 @@ function BookingSpace(props) {
 					progress: undefined,
 				});
 			});
-			debugger;
 		axios
 			.get(`http://localhost:8080/getFloors?teamId=${props.user.teamId}`)
 			.then((data) => {
@@ -139,6 +110,7 @@ function BookingSpace(props) {
 							text: singleData.seatNumber,
 							value: singleData.id,
 							booked: singleData.booked,
+							isDisabled: singleData.booked == 1,
 						})
 				);
 				setSeatNumbersOptions(newData);
@@ -158,7 +130,6 @@ function BookingSpace(props) {
 
 	const onSeatNumbersChange = (seatId) => {
         if(seatNumbersOptions[seatId].booked === 1) {
-			debugger;
             setSeatNumbers(seatNumbers.filter((seatNo) => seatNo != Number(seatId)));
             setSeatNumbersOptions({ ...seatNumbersOptions, [seatId]: { ...seatNumbersOptions[seatId], booked: 0 } });
         }else {
@@ -168,7 +139,7 @@ function BookingSpace(props) {
 	};
 
 	const OnSaveData = (event) => {
-		debugger;
+
 		console.log(seatNumbers)
 		const bookingData = {
 			employeeId: props.user.id,
@@ -190,9 +161,15 @@ function BookingSpace(props) {
 					draggable: true,
 					progress: undefined,
 				});
+
+				let newData = {...seatNumbersOptions};
+				seatNumbers.map(seatNumber => {
+					newData[seatNumber].isDisabled = true;
+				})
+				setSeatNumbersOptions(newData);
 			})
 			.catch((error) => {
-				toast.error("Failed to fetch zones", {
+				toast.error("Failed to allocate space", {
 					position: "bottom-right",
 					autoClose: 5000,
 					hideProgressBar: false,
@@ -238,6 +215,7 @@ function BookingSpace(props) {
 											handleChange={handleChange}
 										/>
 									))}
+									{teamData.length === 0 && <h2>No teams under you.</h2>}
 								</div>
 							</TabPanel>
 							<TabPanel value="2">
@@ -255,6 +233,7 @@ function BookingSpace(props) {
 												{`Floor - ${singleFloor.text}`}
 											</button>
 										))}
+										{floorOptions.length === 0 && <h2>Floor not allocated yet.</h2>}
 									</div>
 								</div>
 							</TabPanel>
@@ -277,6 +256,7 @@ function BookingSpace(props) {
 												{`F${floorNumber}/ ${singleZone.text}`}
 											</button>
 										))}
+										{zoneOption.length === 0 && <h2>Zone not allocated yet.</h2>}
 									</div>
 								</div>
 							</TabPanel>
@@ -292,10 +272,14 @@ function BookingSpace(props) {
 												onClick={() => {
 													onSeatNumbersChange(singleSeat);
 												}}
+												disabled={seatNumbersOptions[singleSeat].isDisabled}
 											>
 												{`F${floorNumber}/Z${zoneNumber}/${seatNumbersOptions[singleSeat].text}`}
 											</button>
 										))}
+										{Object.keys(seatNumbersOptions).length === 0 && (
+											<h2>Seats not allocated yet.</h2>
+										)}
 									</div>
 									{Object.keys(seatNumbersOptions).length !== 0 && (
 										<button className="btn save" onClick={OnSaveData}>
