@@ -23,7 +23,7 @@ function CustomCard(props) {
 				</CardContent>
 			</CardActionArea>
 			<CardActions>
-				<Button size="" color="primary" onClick={() => {props.onTeamNameChange(props.teamId); props.handleChange(null, "2")}}>
+				<Button size="" color="primary" onClick={() => {props.onTeamNameChange(props.teamId, props.teamName); props.handleChange(null, "2")}}>
 					Select
 				</Button>
 			</CardActions>
