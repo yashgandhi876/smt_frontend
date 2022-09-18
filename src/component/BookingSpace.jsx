@@ -148,7 +148,7 @@ function BookingSpace(props) {
 			zoneId: zoneNumber,
 			seatIds: seatNumbers,
 		};
-
+		debugger;
 		axios
 			.put(`http://localhost:8080/bookSeats`, bookingData)
 			.then(() => {
@@ -167,6 +167,10 @@ function BookingSpace(props) {
 					newData[seatNumber].isDisabled = true;
 				})
 				setSeatNumbersOptions(newData);
+				setTeamNumber("")
+				setFloorNumber("")
+				setZoneNumber("")
+				setSeatNumbers([])
 			})
 			.catch((error) => {
 				toast.error("Failed to allocate space", {
