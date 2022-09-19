@@ -208,7 +208,7 @@ function BookingSpace(props) {
 					newData[unallocatedSeatNumber].reserve = false;
 				});
 				setSeatNumbersOptions(newData);
-				props.setTotalNumberOfSeats(props.totalNumberOfSeats + seatNumbers.length);
+				props.setTotalNumberOfSeats(props.totalNumberOfSeats + unallocateSeatNumbers.length);
 				setUnallocateSeatNumbers([]);
 			})
 			.catch((error) => {
@@ -332,7 +332,7 @@ function BookingSpace(props) {
 												{`Floor - ${singleFloor.text}`}
 											</button>
 										))}
-										{floorOptions.length === 0 && <h2>Floor not allocated yet.</h2>}
+										{floorOptions.length === 0 && <h2 >Floor not allocated yet.</h2>}
 									</div>
 								</div>
 							</TabPanel>

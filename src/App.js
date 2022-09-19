@@ -15,6 +15,7 @@ function App() {
 				<Navbar user={user} />
 				<Routes>
 					<Route path="/" element={<Home />} />
+					<Route path="/smt_frontend" element={<Home />} />
 					<Route path="/login" element={<LogIn user={user} setUser={setUser} />} />
 					<Route path="/spaceAllowcation" element={<SpaceAllocation user={user} setUser={setUser} />} />
 				</Routes>
